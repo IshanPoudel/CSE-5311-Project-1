@@ -40,9 +40,21 @@ def read_file(file_name ):
     
     return arr
 
+def quicksort(arr):
+
+    if len(arr) <= 1:
+        return arr
+    
+    #Pick the middle as the pivot
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x[3] < pivot[3]]
+    middle = [x for x in arr if x[3] == pivot[3]]
+    right = [x for x in arr if x[3] > pivot[3]]
+
+    return quicksort(left) + middle + quicksort(right)
 
 
-def insertion_sort(arr , file_size):
+def quick_sort_write(arr , file_size):
 
     # The function takes the arr
     # Sorts it using the algorithm
@@ -55,20 +67,12 @@ def insertion_sort(arr , file_size):
 
     size = len(arr)
 
-    for i in range(1 , size):
-        j=i-1
-        key_arr = arr[i]
-        key = arr[i][3]
-
-        while j>=0 and key<arr[j][3]:
-            arr[j+1]=arr[j]
-            j=j-1
-        arr[j+1]=key_arr
+    arr=quicksort(arr)
     
     end_time = time.time()
 
     #Need to print a file output
-    with open('arrIS_O_'+str(file_size)+'.txt' , 'w') as file:
+    with open('arrQK_O_'+str(file_size)+'.txt' , 'w') as file:
         for row in arr:
             file.write(" ".join(map(str, row)))
             file.write('\n')
@@ -80,14 +84,14 @@ def insertion_sort(arr , file_size):
     
     
 #To generate new files
-generate_file()
+# generate_file()
 
 
 size = [20 , 100 , 2000 , 6000]
 
 for file_size in size:
     arr = read_file('arr'+str(file_size)+'.txt')
-    insertion_sort(arr , file_size)
+    quick_sort_write(arr , file_size)
     print(f"Done with file of size {file_size}")
 
 
