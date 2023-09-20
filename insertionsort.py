@@ -17,7 +17,28 @@ def generate_file():
         print(f"Done generating size {num}")
 
 
-generate_file()
+
+
+def read_file(file_name ):
+
+    #Reads a file _name and returns a 4 columned data strucutre where the fourth column is the sum
+    arr=[]
+
+    try:
+        with open(file_name , "r") as file:
+            #Open each line
+            for line in file:
+                #Strip values
+                values = [int(value) for value in line.strip().split()]                
+                #Store the value in an array
+                arr.append([values[0] , values[1] , values[2] , values[0]+values[1]+values[2]])
 
 
 
+    except:
+        print(f"File not found")
+    
+    return arr
+
+
+arr = read_file('arr20.txt')
