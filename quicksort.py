@@ -1,44 +1,30 @@
-#Create a function to generate filkes
+# Library for Creating arrXXX.txt Files with Random Number Generation
 import random
+
+# Library for Tracking Time Taken for Algorithm Runtime
 import time
 
-def generate_file():
-    file_size=[20,100,2000,6000]
 
-    for num in file_size:
-        file_name = "arr"+str(num)+".txt"
-        #Open the file
-        with open(file_name , "w") as file:
-            #Run a for loop
-            for i in range(num):
-                random_numbers = [random.randint(1, 100) for _ in range(3)]
-                file.write(" ".join(map(str, random_numbers)))
-                file.write("\n")
-        
-        print(f"Done generating size {num}")
-
-
-
+# Reads FileName and Returns 4 Columned Data Structure where Column 4 is the Sum of Columns 1, 2, and 3
 def read_file(file_name ):
-
-    #Reads a file _name and returns a 4 columned data strucutre where the fourth column is the sum
+    # Define and Instantiate Array
     arr=[]
 
+    # Try - Except Block for Cases when Wrong File Name is Given
     try:
         with open(file_name , "r") as file:
-            #Open each line
+            # Loop Through Each Line in File
             for line in file:
-                #Strip values
+                # Strip Values from Line and Remove Spaces then Store in Values
                 values = [int(value) for value in line.strip().split()]                
-                #Store the value in an array
+                # Store the Values in Array along with Summation of the 3 Columns in Column 4
                 arr.append([values[0] , values[1] , values[2] , values[0]+values[1]+values[2]])
-
-
-
     except:
         print(f"File not found")
     
+    # Return Newly Formed 4 Tuple Array
     return arr
+
 
 def quicksort(arr):
 
@@ -80,15 +66,10 @@ def quick_sort_write(arr , file_size):
         file.write("Total runtime: " + str(end_time-start_time) + " seconds")
 
 
-
-    
-    
-#To generate new files
-# generate_file()
-
-
+# Define and Instantiate File Sizes We Will Sort Through
 size = [20 , 100 , 2000 , 6000]
 
+# Loop Through the 4 Files We Wish to Sort
 for file_size in size:
     arr = read_file('arr'+str(file_size)+'.txt')
     quick_sort_write(arr , file_size)
