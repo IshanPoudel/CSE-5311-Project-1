@@ -58,7 +58,7 @@ def insertion_sort(arr , file_size):
 
     #Get the size of the arr 
 
-    start_time = time.time()
+    start_time = time.perf_counter()
 
     size = len(arr)
 
@@ -72,7 +72,7 @@ def insertion_sort(arr , file_size):
             j=j-1
         arr[j+1]=key_arr
     
-    end_time = time.time()
+    end_time = time.perf_counter()
 
     #Need to print a file output
     with open('arrIS_O_'+str(file_size)+'.txt' , 'w') as file:
